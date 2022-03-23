@@ -2,7 +2,7 @@
 
 
 
-This is a  web chat application. Where you can send private messages to online users. 
+This is a  web chat application. Where you can send encrypted messages to online users. 
 
 ## Getting Started
 
