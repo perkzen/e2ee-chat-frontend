@@ -1,13 +1,11 @@
 import React, { FC } from 'react';
 import classes from './Layout.module.scss';
-import { Typography } from '@mui/material';
+import { Menu } from '../index';
 
 const Layout: FC = ({ children }) => {
   return (
     <div className={classes.Container}>
-      <div>
-        <Typography>Navbar</Typography>
-      </div>
+      <Menu />
       <div>{children}</div>
     </div>
   );
