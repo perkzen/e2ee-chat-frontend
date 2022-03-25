@@ -4,6 +4,7 @@ import {TabContext} from "@mui/lab";
 import TabList from "@mui/lab/TabList";
 import Tab from "@mui/material/Tab";
 import TabPanel from "@mui/lab/TabPanel";
+import {LoginTab, RegisterTab} from "../index";
 
 interface ModalProps {
     open: boolean
@@ -30,8 +31,12 @@ const AuthModal: FC<ModalProps> = ({open, onClose}) => {
                     </Box>
                 </DialogTitle>
                 <DialogContent>
-                    <TabPanel value="1">Login</TabPanel>
-                    <TabPanel value="2">Register</TabPanel>
+                    <TabPanel value="1">
+                        <LoginTab/>
+                    </TabPanel>
+                    <TabPanel value="2">
+                        <RegisterTab/>
+                    </TabPanel>
                 </DialogContent>
             </Dialog>
         </TabContext>
