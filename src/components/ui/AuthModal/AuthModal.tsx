@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, SyntheticEvent, useState} from 'react';
 import {Box, Dialog, DialogContent, DialogTitle} from "@mui/material";
 import {TabContext} from "@mui/lab";
 import TabList from "@mui/lab/TabList";
@@ -11,9 +11,9 @@ interface ModalProps {
 }
 
 const AuthModal: FC<ModalProps> = ({open, onClose}) => {
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = useState('1');
 
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    const handleChange = (event: SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
 
