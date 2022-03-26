@@ -1,7 +1,7 @@
 import React, { FC, SyntheticEvent, useState } from 'react';
 import classes from './Menu.module.scss';
 import { Box, Card, CardContent } from '@mui/material';
-import { AuthModal, Input, UserList } from '../index';
+import { Input, UserList } from '../index';
 import { MenuHeader } from '../index';
 import { TabContext, TabPanel } from '@mui/lab';
 import TabList from '@mui/lab/TabList';
@@ -11,12 +11,6 @@ const users = ['Domen Perko', 'Gregor Sulcer', 'Davorin Drozg', 'Neke Neke'];
 const conversations = ['Jože Boža', 'Rektor bektor'];
 
 const Menu: FC = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleClose = () => {
-    setModalOpen(!modalOpen);
-  };
-
   const [value, setValue] = useState('1');
 
   const handleChange = (event: SyntheticEvent, newValue: string) => {
@@ -28,7 +22,7 @@ const Menu: FC = () => {
       <TabContext value={value}>
         <Card className={classes.Container}>
           <CardContent className={classes.Spacing}>
-            <MenuHeader username={'Domen Pero'} />
+            <MenuHeader />
             <Input placeholder={'Search for users'} />
             <Box className={classes.UserList}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -46,7 +40,6 @@ const Menu: FC = () => {
             </Box>
           </CardContent>
         </Card>
-        <AuthModal open={modalOpen} onClose={handleClose} />
       </TabContext>
     </>
   );

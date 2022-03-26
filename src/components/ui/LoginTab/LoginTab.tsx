@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import classes from './LoginTab.module.scss';
 import { Button, Input } from '../index';
 import { useForm } from 'react-hook-form';
+import { useAppDispatch } from '../../../store/app/hooks';
+import { login } from '../../../store/actions/authActions';
 
 interface LoginFormData {
   username: string;
@@ -14,6 +16,7 @@ const defaultValues: LoginFormData = {
 };
 
 const LoginTab: FC = () => {
+  const dispatch = useAppDispatch();
   const { register, formState, handleSubmit } = useForm<LoginFormData>({
     reValidateMode: 'onSubmit',
     defaultValues,
@@ -22,14 +25,14 @@ const LoginTab: FC = () => {
   const { errors } = formState;
 
   const onSubmit = (data: LoginFormData) => {
-    console.log(data);
+    dispatch(login(data));
   };
 
   return (
     <form className={classes.Container} onSubmit={handleSubmit(onSubmit)}>
       <Input label={'Username'} {...register('username')} />
       <Input label={'Password'} {...register('password')} type={'password'} />
-      <Button text={'Login'} onClick={() => console.log('test')} />
+      <Button text={'Login'} />
     </form>
   );
 };

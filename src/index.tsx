@@ -9,13 +9,13 @@ import { Layout } from './components/ui';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Layout>
-        <Provider store={store}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Layout>
           <App />
-        </Provider>
-      </Layout>
-    </BrowserRouter>
+        </Layout>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

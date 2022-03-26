@@ -3,19 +3,30 @@ import classes from './MenuHeader.module.scss';
 import { Avatar, Box, IconButton, Typography } from '@mui/material';
 import { createAvatar } from '../../../utils/createAvatar';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useAppDispatch, useAppSelector } from '../../../store/app/hooks';
+import { logout } from '../../../store/features/authSlice';
 
-interface MenuHeaderProps {
-  username: string;
-}
+const MenuHeader: FC = () => {
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
-const MenuHeader: FC<MenuHeaderProps> = ({ username }) => {
   return (
     <Box className={classes.Container}>
-      <Avatar src={createAvatar(username)} sx={{ width: 50, height: 50 }} />
-      <Typography>{username}</Typography>
-      <IconButton className={classes.Icon}>
-        <LogoutIcon />
-      </IconButton>
+      {user && (
+        <>
+          <Avatar
+            src={createAvatar(user.username)}
+            sx={{ width: 50, height: 50 }}
+          />
+          <Typography>{user.username}</Typography>
+          <IconButton
+            className={classes.Icon}
+            onClick={() => dispatch(logout())}
+          >
+            <LogoutIcon />
+          </IconButton>
+        </>
+      )}
     </Box>
   );
 };

@@ -8,10 +8,9 @@ import { LoginTab, RegisterTab } from '../index';
 
 interface ModalProps {
   open: boolean;
-  onClose: () => void;
 }
 
-const AuthModal: FC<ModalProps> = ({ open, onClose }) => {
+const AuthModal: FC<ModalProps> = ({ open }) => {
   const [value, setValue] = useState('1');
 
   const handleChange = (event: SyntheticEvent, newValue: string) => {
@@ -20,7 +19,7 @@ const AuthModal: FC<ModalProps> = ({ open, onClose }) => {
 
   return (
     <TabContext value={value}>
-      <Dialog open={open} onClose={onClose} onBackdropClick={onClose} fullWidth>
+      <Dialog open={open} fullWidth>
         <DialogTitle>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleChange} variant={'fullWidth'}>

@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import classes from './RegisterTab.module.scss';
 import { Button, Input } from '../index';
 import { useForm } from 'react-hook-form';
+import { useAppDispatch } from '../../../store/app/hooks';
+import { registerUser } from '../../../store/actions/authActions';
 
 interface RegisterFormData {
   username: string;
@@ -16,6 +18,7 @@ const defaultValues: RegisterFormData = {
 };
 
 const RegisterTab: FC = () => {
+  const dispatch = useAppDispatch();
   const { register, formState, handleSubmit } = useForm<RegisterFormData>({
     reValidateMode: 'onSubmit',
     defaultValues,
@@ -24,7 +27,7 @@ const RegisterTab: FC = () => {
   const { errors } = formState;
 
   const onSubmit = (data: RegisterFormData) => {
-    console.log(data);
+    dispatch(registerUser(data));
   };
 
   return (
