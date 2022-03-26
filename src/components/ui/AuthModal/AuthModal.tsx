@@ -21,10 +21,10 @@ const AuthModal: FC<ModalProps> = ({open, onClose}) => {
 
     return (
         <TabContext value={value}>
-            <Dialog open={open} onClose={onClose}>
+            <Dialog open={open} onClose={onClose} fullWidth>
                 <DialogTitle>
                     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                        <TabList onChange={handleChange} aria-label="lab API tabs example">
+                        <TabList onChange={handleChange} variant={"fullWidth"}>
                             <Tab label="Sign in" value="1"/>
                             <Tab label="Sign up" value="2"/>
                         </TabList>
