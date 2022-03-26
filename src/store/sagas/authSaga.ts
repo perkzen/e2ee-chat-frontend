@@ -11,6 +11,7 @@ import { Auth } from '../../api';
 import { AxiosError, AxiosResponse } from 'axios';
 import { User } from '../models/Auth';
 import { loginStart, registerStart } from '../features/authSlice';
+import { joinChat } from '../features/socketSlice';
 
 export function* LoginSaga(action: ReturnType<typeof login>): Generator {
   try {
@@ -20,6 +21,7 @@ export function* LoginSaga(action: ReturnType<typeof login>): Generator {
       action.payload
     )) as AxiosResponse<User>;
     yield put(loginSuccess(data));
+    yield put(joinChat(data));
   } catch (e) {
     const error = e as AxiosError;
     const errorMessage = error.response?.data.message;

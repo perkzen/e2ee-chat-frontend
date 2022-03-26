@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userStorage } from '../../utils/localStorage';
 import { User } from '../models/Auth';
 
-export interface AuthState {
+interface AuthState {
   user: User | null;
   error: string | null;
   loading: boolean;
