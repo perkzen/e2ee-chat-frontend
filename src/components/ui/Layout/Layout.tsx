@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import classes from './Layout.module.scss';
 import { Menu } from '../index';
+import { Box } from '@mui/material';
 
 const Layout: FC = ({ children }) => {
   return (
-    <div className={classes.Container}>
+    <Box className={classes.Container}>
       <Menu />
-      <div>{children}</div>
-    </div>
+      <Box sx={{ paddingX: '4rem' }}>{children}</Box>
+    </Box>
   );
 };
 
