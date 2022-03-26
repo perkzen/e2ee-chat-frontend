@@ -9,9 +9,6 @@ import Tab from '@mui/material/Tab';
 import { useAppSelector } from '../../../store/app/hooks';
 import { User } from '../../../store/models/Auth';
 
-//const users = ['Domen Perko', 'Gregor Sulcer', 'Davorin Drozg', 'Neke Neke'];
-//const conversations = ['Jože Boža', 'Rektor bektor'];
-
 const Menu: FC = () => {
   const [value, setValue] = useState('1');
   const [users, setUsers] = useState<User[]>([]);
