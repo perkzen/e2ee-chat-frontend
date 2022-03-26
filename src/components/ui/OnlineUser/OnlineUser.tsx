@@ -6,22 +6,28 @@ import './Dot.scss';
 
 interface OnlineUserProps {
   username: string;
+  dot?: boolean;
 }
 
-const OnlineUser: FC<OnlineUserProps> = ({ username }) => {
+const OnlineUser: FC<OnlineUserProps> = ({ username, dot = true }) => {
   return (
     <Box className={classes.Container}>
-      <Badge
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        variant={'dot'}
-        overlap="circular"
-        color={'success'}
-      >
+      {dot ? (
+        <Badge
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          variant={'dot'}
+          overlap="circular"
+          color={'success'}
+        >
+          <Avatar src={createAvatar(username)} sx={{ width: 50, height: 50 }} />
+        </Badge>
+      ) : (
         <Avatar src={createAvatar(username)} sx={{ width: 50, height: 50 }} />
-      </Badge>
+      )}
+
       <Typography>{username}</Typography>
     </Box>
   );
