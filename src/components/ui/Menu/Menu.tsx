@@ -18,9 +18,9 @@ const Menu: FC = () => {
             Chat
           </Typography>
           <Box className={classes.OnlineUsers}>Online users</Box>
-          <div className={classes.ButtonContainer}>
+          <Box className={classes.ButtonContainer}>
             <Button text={'Login'} onClick={handleClose} />
-          </div>
+          </Box>
         </CardContent>
       </Card>
       <AuthModal open={modalOpen} onClose={handleClose} />
