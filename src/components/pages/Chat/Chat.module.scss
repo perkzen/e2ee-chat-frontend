@@ -1,5 +1,8 @@
 .Container {
   .ChatMessage {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     height: 82vh;
   }
 

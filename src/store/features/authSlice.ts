@@ -3,12 +3,12 @@ import { userStorage } from '../../utils/localStorage';
 import { User } from '../models/Auth';
 
 export interface AuthState {
-  user?: User;
+  user: User | null;
   authError: string;
 }
 
 const initialState: AuthState = {
-  user: userStorage.getUser(),
+  user: userStorage.getUser() || null,
   authError: '',
 };
 
@@ -22,7 +22,7 @@ export const authSlice = createSlice({
     },
     logout: (state) => {
       userStorage.clearUser();
-      state.user = undefined;
+      state.user = null;
     },
   },
 });
