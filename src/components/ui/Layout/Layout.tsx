@@ -7,7 +7,7 @@ const Layout: FC = ({ children }) => {
   return (
     <Box className={classes.Container}>
       <Menu />
-      <Box sx={{ paddingX: '4rem' }}>{children}</Box>
+      <Box>{children}</Box>
     </Box>
   );
 };

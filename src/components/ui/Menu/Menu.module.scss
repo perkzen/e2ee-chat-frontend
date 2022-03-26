@@ -1,6 +1,12 @@
 .Container {
-  .OnlineUsers {
-    min-height: 85vh;
+
+  .Spacing {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .UserList {
     display: flex;
     flex-direction: column;
     gap: 2rem;
