@@ -34,7 +34,7 @@ const Menu: FC = () => {
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <TabList onChange={handleChange} variant={'fullWidth'}>
                   <Tab label="Online" value="1" />
-                  <Tab label="Conversations" value="2" />
+                  <Tab label="History" value="2" />
                 </TabList>
               </Box>
               <TabPanel value={'1'}>
