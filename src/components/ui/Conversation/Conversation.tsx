@@ -44,7 +44,7 @@ const Conversation = () => {
       };
       socket.emit('send_message', {
         senderId: user.id,
-        receiverId: receiver.id,
+        receiver: receiver,
         text: data.text,
       });
       dispatch(sendMessage(message));
@@ -66,9 +66,9 @@ const Conversation = () => {
 
   useEffect(() => {
     socket.on('receive_message', (data: Message) => {
-      dispatch(receiveMessage(data));
+      if (data.senderId === receiver?.id) dispatch(receiveMessage(data));
     });
-  }, []);
+  }, [receiver]);
 
   return (
     <>

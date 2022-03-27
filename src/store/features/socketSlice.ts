@@ -9,7 +9,7 @@ interface SocketState {
 }
 
 const initialState: SocketState = {
-  socket: io('http://localhost:8080', {
+  socket: io('ws://localhost:8080', {
     reconnection: true,
     reconnectionDelay: 1000,
     reconnectionDelayMax: 10000,

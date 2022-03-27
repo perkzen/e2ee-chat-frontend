@@ -8,6 +8,7 @@ import RegisterTab from './RegisterTab/RegisterTab';
 import MenuHeader from './MenuHeader/MenuHeader';
 import UserList from './UserList/UserList';
 import ChatHeader from './ChatHeader/ChatHeader';
+import Conversation from './Conversation/Conversation';
 
 export {
   Button,
@@ -20,4 +21,5 @@ export {
   MenuHeader,
   UserList,
   ChatHeader,
+  Conversation,
 };
