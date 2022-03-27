@@ -17,7 +17,6 @@ const OnlineUser: FC<OnlineUserProps> = ({ user, dot = true }) => {
 
   const handleClick = () => {
     dispatch(selectReceiver(user));
-    console.log('da');
   };
 
   return (

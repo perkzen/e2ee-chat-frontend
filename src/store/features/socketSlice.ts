@@ -2,13 +2,20 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { io, Socket } from 'socket.io-client';
 import { User } from '../models/Auth';
 import { logout } from './authSlice';
+import { userStorage } from '../../utils/localStorage';
 
 interface SocketState {
   socket: Socket;
 }
 
 const initialState: SocketState = {
-  socket: io('http://localhost:8080'),
+  socket: io('http://localhost:8080', {
+    reconnection: true,
+    reconnectionDelay: 1000,
+    reconnectionDelayMax: 10000,
+    reconnectionAttempts: Infinity,
+    auth: userStorage.getUser(),
+  }),
 };
 
 const socketSlice = createSlice({
@@ -16,12 +23,12 @@ const socketSlice = createSlice({
   initialState,
   reducers: {
     joinChat: (state, action: PayloadAction<User>) => {
-      state.socket.emit('join', action.payload);
+      state.socket.emit('login', action.payload);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(logout, (state) => {
-      state.socket.emit('leave');
+      state.socket.emit('logout', userStorage.getUser());
     });
   },
 });

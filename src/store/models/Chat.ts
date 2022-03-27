@@ -3,3 +3,8 @@ export interface Message {
   senderId: string;
   text: string;
 }
+
+export interface ConversationRequest {
+  senderId: string;
+  receiverId: string;
+}

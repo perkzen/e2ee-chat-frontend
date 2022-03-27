@@ -3,7 +3,7 @@ import authReducer from '../features/authSlice';
 import socketReducer from '../features/socketSlice';
 import chatReducer from '../features/chatSlice';
 import createSagaMiddleware from 'redux-saga';
-import { watchAuth } from '../sagas';
+import { watchAuth, watchChat } from '../sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
@@ -19,6 +19,7 @@ export const store = configureStore({
 });
 
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchChat);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
