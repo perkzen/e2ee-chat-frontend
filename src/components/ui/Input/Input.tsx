@@ -1,16 +1,17 @@
 import React, { forwardRef } from 'react';
 import { BaseTextFieldProps, TextField } from '@mui/material';
+import { FieldError } from 'react-hook-form';
 
 interface InputProps extends BaseTextFieldProps {
-  errorText?: string;
+  errors?: FieldError;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ errorText, ...props }, ref) => {
+  ({ errors, ...props }, ref) => {
     return (
       <TextField
-        error={errorText !== undefined}
-        helperText={errorText}
+        error={errors !== undefined}
+        helperText={errors}
         variant={'outlined'}
         ref={ref}
         {...props}
