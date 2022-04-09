@@ -28,12 +28,17 @@ const Conversation = () => {
   const { receiver, conversationId, messages } = useAppSelector(
     (state) => state.chat
   );
-  const messagesEndRef = useRef<null | HTMLDivElement>(null);
+  const messagesRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useAppDispatch();
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messages) {
+      let lastMessage = messagesRef?.current?.lastElementChild;
+      lastMessage?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
   };
 
   const { register, reset, handleSubmit } = useForm<InputData>({
@@ -54,7 +59,7 @@ const Conversation = () => {
         text: data.text,
       });
       dispatch(sendMessage(message));
-      scrollToBottom();
+      // scrollToBottom();
     }
     reset();
   };
@@ -75,21 +80,24 @@ const Conversation = () => {
     socket.on('receive_message', (data: Message) => {
       if (data.senderId === receiver?.id) {
         dispatch(receiveMessage(data));
-        scrollToBottom();
+        // scrollToBottom();
       }
     });
   }, [receiver]);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <>
       {receiver && (
         <>
           <div className={classes.ScrollableBox}>
-            <Box className={classes.ChatMessage}>
+            <Box className={classes.ChatMessage} ref={messagesRef}>
               {messages.map((message) => (
                 <ChatMessage message={message} key={v4()} />
               ))}
-              <div ref={messagesEndRef} />
             </Box>
           </div>
           <form
