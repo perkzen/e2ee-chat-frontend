@@ -1,0 +1,22 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 82vh;
+  width: 100%;
+  overflow: auto;
+}
+
+
+.InputContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .Input {
+    width: 40%;
+  }
+}
+

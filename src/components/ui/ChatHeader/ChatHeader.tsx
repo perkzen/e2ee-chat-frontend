@@ -9,10 +9,14 @@ const ChatHeader: FC = () => {
 
   return (
     <>
-      <Box className={classes.Container}>
-        {receiver && <OnlineUser user={receiver} dot={false} />}
-      </Box>
-      <Divider flexItem />
+      {receiver && (
+        <>
+          <Box className={classes.Container}>
+            <OnlineUser user={receiver} dot={false} />
+          </Box>
+          <Divider flexItem />
+        </>
+      )}
     </>
   );
 };

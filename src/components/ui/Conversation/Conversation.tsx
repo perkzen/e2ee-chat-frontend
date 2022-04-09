@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
-import classes from '../../pages/Chat/Chat.module.scss';
+import classes from './Conversation.module.scss';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import { v4 } from 'uuid';
 import { Input } from '../index';
@@ -91,13 +91,11 @@ const Conversation = () => {
     <>
       {receiver && (
         <>
-          <div className={classes.ScrollableBox}>
-            <Box className={classes.ChatMessage} ref={messagesRef}>
-              {messages.map((message) => (
-                <ChatMessage message={message} key={v4()} />
-              ))}
-            </Box>
-          </div>
+          <Box className={classes.Container} ref={messagesRef}>
+            {messages.map((message) => (
+              <ChatMessage message={message} key={v4()} />
+            ))}
+          </Box>
           <form
             className={classes.InputContainer}
             onSubmit={handleSubmit(onSubmit)}
