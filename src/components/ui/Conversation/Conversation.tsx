@@ -59,7 +59,6 @@ const Conversation = () => {
         text: data.text,
       });
       dispatch(sendMessage(message));
-      // scrollToBottom();
     }
     reset();
   };
@@ -80,7 +79,6 @@ const Conversation = () => {
     socket.on('receive_message', (data: Message) => {
       if (data.senderId === receiver?.id) {
         dispatch(receiveMessage(data));
-        // scrollToBottom();
       }
     });
   }, [receiver]);
