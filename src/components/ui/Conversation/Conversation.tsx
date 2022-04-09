@@ -91,7 +91,7 @@ const Conversation = () => {
     <>
       {receiver && (
         <>
-          <Box className={classes.Container} ref={messagesRef}>
+          <Box className={classes.MessageContainer} ref={messagesRef}>
             {messages.map((message) => (
               <ChatMessage message={message} key={v4()} />
             ))}
