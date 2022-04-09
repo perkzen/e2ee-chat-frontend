@@ -11,7 +11,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <TextField
         error={errors !== undefined}
-        helperText={errors}
+        helperText={errors?.message}
         variant={'outlined'}
         ref={ref}
         {...props}
