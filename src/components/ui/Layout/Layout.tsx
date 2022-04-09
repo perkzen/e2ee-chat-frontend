@@ -8,13 +8,13 @@ const Layout: FC = ({ children }) => {
   const { user } = useAppSelector((state) => state.auth);
 
   return (
-    <>
+    <div className={classes.PageContent}>
       <Box className={classes.Container}>
         <Menu />
         <Box>{children}</Box>
       </Box>
       <AuthModal open={!user} />
-    </>
+    </div>
   );
 };
 

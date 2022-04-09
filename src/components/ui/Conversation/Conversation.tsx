@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useRef} from 'react';
 import { Box } from '@mui/material';
 import classes from '../../pages/Chat/Chat.module.scss';
 import ChatMessage from '../ChatMessage/ChatMessage';
@@ -28,7 +28,13 @@ const Conversation = () => {
   const { receiver, conversationId, messages } = useAppSelector(
     (state) => state.chat
   );
+  const messagesEndRef = useRef<null | HTMLDivElement>(null);
+
   const dispatch = useAppDispatch();
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }
 
   const { register, reset, handleSubmit } = useForm<InputData>({
     reValidateMode: 'onChange',
@@ -48,6 +54,7 @@ const Conversation = () => {
         text: data.text,
       });
       dispatch(sendMessage(message));
+      scrollToBottom();
     }
     reset();
   };
@@ -66,7 +73,10 @@ const Conversation = () => {
 
   useEffect(() => {
     socket.on('receive_message', (data: Message) => {
-      if (data.senderId === receiver?.id) dispatch(receiveMessage(data));
+      if (data.senderId === receiver?.id) {
+        dispatch(receiveMessage(data));
+        scrollToBottom();
+      }
     });
   }, [receiver]);
 
@@ -74,11 +84,14 @@ const Conversation = () => {
     <>
       {receiver && (
         <>
-          <Box className={classes.ChatMessage}>
-            {messages.map((message) => (
-              <ChatMessage message={message} key={v4()} />
-            ))}
-          </Box>
+          <div className={classes.ScrolableBox}>
+            <Box className={classes.ChatMessage}>
+              {messages.map((message) => (
+                  <ChatMessage message={message} key={v4()} />
+              ))}
+              <div ref={messagesEndRef} />
+            </Box>
+          </div>
           <form
             className={classes.InputContainer}
             onSubmit={handleSubmit(onSubmit)}

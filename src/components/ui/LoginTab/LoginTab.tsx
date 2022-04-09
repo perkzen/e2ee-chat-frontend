@@ -30,7 +30,7 @@ const LoginTab: FC = () => {
 
   return (
     <form className={classes.Container} onSubmit={handleSubmit(onSubmit)}>
-      <Input label={'Username'} {...register('username')} />
+      <Input label={'Username'} {...register('username')}/>
       <Input label={'Password'} {...register('password')} type={'password'} />
       <Button text={'Login'} />
     </form>
