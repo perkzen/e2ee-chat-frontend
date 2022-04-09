@@ -1,9 +1,12 @@
-import React, { FC } from 'react';
+import React, {FC, useState} from 'react';
 import classes from './RegisterTab.module.scss';
 import { Button, Input } from '../index';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch } from '../../../store/app/hooks';
-import { registerUser } from '../../../store/actions/authActions';
+import {useAppDispatch, useAppSelector} from '../../../store/app/hooks';
+import {loginError, registerUser} from '../../../store/actions/authActions';
+import {FormHelperText} from "@mui/material";
+import {getElementError} from "@testing-library/react";
+import {RootState, store} from "../../../store/app/store";
 
 interface RegisterFormData {
   username: string;
@@ -23,6 +26,7 @@ const RegisterTab: FC = () => {
     reValidateMode: 'onSubmit',
     defaultValues,
   });
+  const err = useAppSelector((state => state.auth.error));
 
   const { errors } = formState;
 
@@ -39,6 +43,7 @@ const RegisterTab: FC = () => {
         {...register('password2')}
         type={'password'}
       />
+      <FormHelperText className={classes.ErrorMessage}>{err}</FormHelperText>
       <Button text={'Register'} />
     </form>
   );
