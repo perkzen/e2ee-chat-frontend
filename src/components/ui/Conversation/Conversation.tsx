@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
 import classes from '../../pages/Chat/Chat.module.scss';
 import ChatMessage from '../ChatMessage/ChatMessage';
@@ -33,8 +33,8 @@ const Conversation = () => {
   const dispatch = useAppDispatch();
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const { register, reset, handleSubmit } = useForm<InputData>({
     reValidateMode: 'onChange',
@@ -84,10 +84,10 @@ const Conversation = () => {
     <>
       {receiver && (
         <>
-          <div className={classes.ScrolableBox}>
+          <div className={classes.ScrollableBox}>
             <Box className={classes.ChatMessage}>
               {messages.map((message) => (
-                  <ChatMessage message={message} key={v4()} />
+                <ChatMessage message={message} key={v4()} />
               ))}
               <div ref={messagesEndRef} />
             </Box>
