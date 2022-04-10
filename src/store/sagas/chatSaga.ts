@@ -22,7 +22,7 @@ export function* startConversationSaga(
     const { data } = (yield instance.post(
       Chat.CONVERSATION,
       action.payload
-    )) as AxiosResponse<string>;
+    )) as AxiosResponse<{id:string, keyPair:string[]}>;
     yield put(conversationSuccess(data));
   } catch (e) {
     const error = e as AxiosError;

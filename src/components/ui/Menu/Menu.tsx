@@ -23,6 +23,7 @@ const Menu: FC = () => {
     socket.on('fetchUsers', (onlineUsers: User[]) => setUsers(onlineUsers));
   }, [users]);
 
+  console.log(users);
   return (
     <>
       <TabContext value={value}>
