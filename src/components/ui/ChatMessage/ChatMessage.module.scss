@@ -1,11 +1,13 @@
+@import "theme";
+
 .Container {
   padding: 0 5%;
-  margin-top: 3px;
   position: relative;
-  @apply my-2;
 
 
-  .messageText {
+  .MessageText {
+    margin: 0;
+    padding: 10px 10px;
     width: 100%;
     letter-spacing: 0;
     float: left;
@@ -13,41 +15,28 @@
     word-wrap: break-word;
   }
 
-  .messageDate {
-    position: relative;
-    bottom: -10px;
-    width: fit-content;
-    margin-top: -20px;
-    color: #828282;
-    font-size: 1em;
-  }
-
-  .messageBox {
+  .MessageBox {
     border-radius: 20px;
-    padding: 5px 20px;
+    padding: 1px 5px;
     display: inline-block;
     max-width: 50%;
-    height: calc(100% - 50px);
   }
 
 
-  .sentText {
+  .SentText {
     display: flex;
     align-items: center;
-    color: #828282;
+    color: $background-light;
     letter-spacing: 0.3px;
   }
 
   small {
     position: absolute;
-    @apply pt-2;
+    margin-top: 1rem;
   }
-
-
 }
 
-
-.justifyStart {
+.JustifyStart {
   display: flex;
   justify-content: flex-start;
 
@@ -55,10 +44,9 @@
     top: 85%;
     left: 6%;
   }
-
 }
 
-.justifyEnd {
+.JustifyEnd {
   display: flex;
   justify-content: flex-end;
 
@@ -72,12 +60,12 @@
   display: flex;
   justify-content: flex-end;
   color: white;
-  background: #2979FF;
+  background: $accent-color;
 }
 
 .NotSentByMe {
   display: flex;
   justify-content: flex-start;
   color: #353535;
-  background-color: rgb(53, 54, 58);
+  background-color: $background-light;
 }

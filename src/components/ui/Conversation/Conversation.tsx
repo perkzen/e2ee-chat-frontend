@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import {Box, IconButton} from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import classes from './Conversation.module.scss';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import { v4 } from 'uuid';
@@ -107,7 +107,7 @@ const Conversation = () => {
               {...register('text', { required: 'This field is required' })}
             />
             <IconButton>
-              <SendIcon />
+              <SendIcon sx={{ color: '#2979FF' }} />
             </IconButton>
           </form>
         </>

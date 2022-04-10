@@ -1,14 +1,5 @@
-@mixin inputField() {
-  border-radius: 20px;
-}
+@import "theme";
 
-.Input-bgWhite {
-  @include inputField();
-  background-color: white;
-
-}
-
-.Input-bgBlack {
-  @include inputField();
-  background-color: (53, 54, 58);
+.Container {
+  border-radius: 50px;
 }

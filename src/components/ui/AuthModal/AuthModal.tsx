@@ -21,7 +21,12 @@ const AuthModal: FC<ModalProps> = ({ open }) => {
     <TabContext value={value}>
       <Dialog open={open} fullWidth>
         <DialogTitle>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Box
+            sx={{
+              borderBottom: 1,
+              borderColor: 'divider',
+            }}
+          >
             <TabList onChange={handleChange} variant={'fullWidth'}>
               <Tab label="Sign in" value="1" />
               <Tab label="Sign up" value="2" />

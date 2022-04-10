@@ -1,12 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import classes from './RegisterTab.module.scss';
 import { Button, Input } from '../index';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../store/app/hooks';
-import { loginError, registerUser } from '../../../store/actions/authActions';
+import { registerUser } from '../../../store/actions/authActions';
 import { FormHelperText } from '@mui/material';
-import { getElementError } from '@testing-library/react';
-import { RootState, store } from '../../../store/app/store';
 
 interface RegisterFormData {
   username: string;
@@ -36,13 +34,8 @@ const RegisterTab: FC = () => {
 
   return (
     <form className={classes.Container} onSubmit={handleSubmit(onSubmit)}>
-      <Input label={'Username'} bgWhite {...register('username')} />
-      <Input
-        label={'Password'}
-        bgWhite
-        {...register('password1')}
-        type={'password'}
-      />
+      <Input label={'Username'} {...register('username')} />
+      <Input label={'Password'} {...register('password1')} type={'password'} />
       <Input
         label={'Confirm password'}
         {...register('password2')}
