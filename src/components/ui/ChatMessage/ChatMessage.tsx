@@ -1,5 +1,4 @@
 import React, { FC, LegacyRef } from 'react';
-import dateFormat, { masks } from 'dateformat';
 import classes from './ChatMessage.module.scss';
 import { Message } from '../../../store/models/Chat';
 import { classNames } from '../../../utils/classNames';
@@ -12,10 +11,6 @@ interface ChatMessageProps {
 
 const ChatMessage: FC<ChatMessageProps> = ({ message, messageRef }) => {
   const { user } = useAppSelector((state) => state.auth);
-
-  // masks.hammerTime = 'dd-mm-yyyy hh:MM';
-  // const dateformat = (date: Date | undefined): string =>
-  //   dateFormat(date, 'hammerTime');
 
   return (
     <div
@@ -35,7 +30,6 @@ const ChatMessage: FC<ChatMessageProps> = ({ message, messageRef }) => {
       >
         <p className={classes.MessageText}>{message.text}</p>
       </div>
-      {/*<small>{dateformat(message.time)}</small>*/}
     </div>
   );
 };
