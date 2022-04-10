@@ -26,7 +26,7 @@ const defaultValues: InputData = {
 const Conversation = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { socket } = useAppSelector((state) => state.socket);
-  const { receiver, conversationId, messages } = useAppSelector(
+  const { receiver, conversation, messages } = useAppSelector(
     (state) => state.chat
   );
   const messagesRef = useRef<HTMLDivElement>(null);
@@ -48,10 +48,10 @@ const Conversation = () => {
   });
 
   const onSubmit = (data: InputData) => {
-    if (conversationId && user && receiver) {
+    if (conversation?.id && user && receiver) {
       const message: Message = {
         senderId: user.id,
-        conversationId: conversationId,
+        conversationId: conversation.id,
         text: data.text,
       };
       socket.emit('send_message', {
@@ -68,13 +68,13 @@ const Conversation = () => {
     // not optimized should execute when user sends first message
     if (receiver && user)
       dispatch(
-        conversationStart({ senderId: user.id, receiverId: receiver.id })
+        conversationStart({ senderId: user.id, receiverId: receiver.id, keyPair: [user.key, receiver.key] })
       );
   }, [receiver, dispatch, user]);
 
   useEffect(() => {
-    if (receiver && conversationId) dispatch(fetchMessages(conversationId));
-  }, [receiver, conversationId, dispatch]);
+    if (receiver && conversation?.id) dispatch(fetchMessages(conversation?.id));
+  }, [receiver, conversation, dispatch]);
 
   useEffect(() => {
     socket.on('receive_message', (data: Message) => {

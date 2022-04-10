@@ -6,7 +6,7 @@ export const CHAT_SLICE = 'chat';
 export const conversationStart = createAction<ConversationRequest>(
   `${CHAT_SLICE}/conversationLoading`
 );
-export const conversationSuccess = createAction<string>(
+export const conversationSuccess = createAction<{id:string, keyPair:string[]}>(
   `${CHAT_SLICE}/conversationSuccess`
 );
 export const conversationError = createAction<string>(

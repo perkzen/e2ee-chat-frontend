@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ChatState {
   receiver: User | null;
-  conversationId: string | null;
+  conversation: {id:string, keyPair:string[]} | null;
   messages: Message[];
   loading: boolean;
   error: string | null;
@@ -12,7 +12,7 @@ export interface ChatState {
 
 const initialState: ChatState = {
   receiver: null,
-  conversationId: null,
+  conversation: null,
   messages: [],
   loading: false,
   error: null,
@@ -28,8 +28,8 @@ const chatSlice = createSlice({
     conversationLoading: (state) => {
       state.loading = true;
     },
-    conversationSuccess: (state, action: PayloadAction<string>) => {
-      state.conversationId = action.payload;
+    conversationSuccess: (state, action: PayloadAction<{id:string, keyPair:string[]}>) => {
+      state.conversation = action.payload;
       state.loading = false;
     },
     conversationError: (state, action: PayloadAction<string>) => {
