@@ -21,16 +21,18 @@ const defaultValues: RegisterFormData = {
 
 const RegisterTab: FC = () => {
   const dispatch = useAppDispatch();
-  const { register, formState, handleSubmit } = useForm<RegisterFormData>({
-    reValidateMode: 'onSubmit',
-    defaultValues,
-  });
+  const { register, formState, handleSubmit, reset } =
+    useForm<RegisterFormData>({
+      reValidateMode: 'onSubmit',
+      defaultValues,
+    });
   const err = useAppSelector((state) => state.auth.error);
 
   const { errors } = formState;
 
   const onSubmit = (data: RegisterFormData) => {
     dispatch(registerUser(data));
+    reset();
   };
 
   useEffect(() => {
