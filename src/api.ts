@@ -6,4 +6,5 @@ export enum Auth {
 export enum Chat {
   MESSAGE = 'chat/message',
   CONVERSATION = 'chat/conversation',
+  HISTORY = 'chat/conversation/history',
 }

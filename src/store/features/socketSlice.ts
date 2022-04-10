@@ -3,7 +3,7 @@ import { io, Socket } from 'socket.io-client';
 import { User } from '../models/Auth';
 import { logout } from './authSlice';
 import { userStorage } from '../../utils/localStorage';
-import {generateKey} from "../../utils/crypto";
+import { generateKey } from '../../utils/crypto';
 
 interface SocketState {
   socket: Socket;
@@ -24,7 +24,7 @@ const socketSlice = createSlice({
   initialState,
   reducers: {
     joinChat: (state, action: PayloadAction<User>) => {
-      state.socket.emit('login', {...action.payload, key:generateKey()});
+      state.socket.emit('login', { ...action.payload, key: generateKey() });
     },
   },
   extraReducers: (builder) => {

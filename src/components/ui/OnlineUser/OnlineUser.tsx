@@ -10,9 +10,10 @@ import { selectReceiver } from '../../../store/features/chatSlice';
 interface OnlineUserProps {
   user: User;
   dot?: boolean;
+  message?: string;
 }
 
-const OnlineUser: FC<OnlineUserProps> = ({ user, dot = true }) => {
+const OnlineUser: FC<OnlineUserProps> = ({ user, dot, message = true }) => {
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
@@ -42,8 +43,10 @@ const OnlineUser: FC<OnlineUserProps> = ({ user, dot = true }) => {
           sx={{ width: 50, height: 50 }}
         />
       )}
-
-      <Typography>{user.username}</Typography>
+      <Box>
+        <Typography className={classes.User}>{user.username}</Typography>
+        {message && <Typography>{message}</Typography>}
+      </Box>
     </Box>
   );
 };

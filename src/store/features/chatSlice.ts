@@ -1,12 +1,13 @@
 import { User } from '../models/Auth';
-import { Message } from '../models/Chat';
+import { Conversation, Message } from '../models/Chat';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { logout } from './authSlice';
 import { toast } from 'react-hot-toast';
 
 export interface ChatState {
   receiver: User | null;
-  conversation: { id: string; keyPair: string[] } | null;
+  conversation: Conversation | null;
+  history: Conversation[] | null;
   messages: Message[];
   loading: boolean;
   error: string | null;
@@ -15,6 +16,7 @@ export interface ChatState {
 const initialState: ChatState = {
   receiver: null,
   conversation: null,
+  history: null,
   messages: [],
   loading: false,
   error: null,
@@ -30,10 +32,7 @@ const chatSlice = createSlice({
     conversationLoading: (state) => {
       state.loading = true;
     },
-    conversationSuccess: (
-      state,
-      action: PayloadAction<{ id: string; keyPair: string[] }>
-    ) => {
+    conversationSuccess: (state, action: PayloadAction<Conversation>) => {
       state.conversation = action.payload;
       state.loading = false;
     },
@@ -67,6 +66,20 @@ const chatSlice = createSlice({
     fetchMessagesError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
+    },
+    fetchConversationHistoryStart: (state) => {
+      state.loading = true;
+    },
+    fetchConversationHistorySuccess: (
+      state,
+      action: PayloadAction<Conversation[]>
+    ) => {
+      state.history = action.payload;
+      state.loading = false;
+    },
+    fetchConversationHistoryError: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
   extraReducers: (builder) => {

@@ -13,3 +13,10 @@ export interface ConversationRequest {
   receiverId: string;
   keyPair: (string | undefined)[];
 }
+
+export interface Conversation {
+  id: string;
+  keyPair: string[];
+  lastMessage?: Message;
+  user: User;
+}

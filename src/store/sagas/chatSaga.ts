@@ -2,6 +2,9 @@ import {
   conversationError,
   conversationStart,
   conversationSuccess,
+  fetchConversationHistory,
+  fetchConversationHistoryError,
+  fetchConversationHistorySuccess,
   fetchMessages,
   fetchMessagesError,
   fetchMessagesSuccess,
@@ -13,7 +16,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { put } from 'redux-saga/effects';
 import instance from '../../axios';
 import { Chat } from '../../api';
-import { Message } from '../models/Chat';
+import { Conversation, Message } from '../models/Chat';
 import { toast } from 'react-hot-toast';
 import { Errors } from '../../errors';
 
@@ -24,7 +27,7 @@ export function* startConversationSaga(
     const { data } = (yield instance.post(
       Chat.CONVERSATION,
       action.payload
-    )) as AxiosResponse<{ id: string; keyPair: string[] }>;
+    )) as AxiosResponse<Conversation>;
     yield put(conversationSuccess(data));
   } catch (e) {
     const error = e as AxiosError;
@@ -64,5 +67,21 @@ export function* fetchMessagesSaga(
     const errorMessage = error.response?.data.message;
     yield put(fetchMessagesError(errorMessage));
     toast.error(Errors.MESSAGE_FETCH);
+  }
+}
+
+export function* fetchConversationHistorySaga(
+  action: ReturnType<typeof fetchConversationHistory>
+): Generator {
+  try {
+    const { data } = (yield instance.get(
+      `${Chat.HISTORY}/${action.payload}`
+    )) as AxiosResponse<Conversation[]>;
+    yield put(fetchConversationHistorySuccess(data));
+  } catch (e) {
+    const error = e as AxiosError;
+    const errorMessage = error.response?.data.message;
+    yield put(fetchConversationHistoryError(errorMessage));
+    toast.error(Errors.HISTORY);
   }
 }

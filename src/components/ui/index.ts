@@ -9,6 +9,7 @@ import MenuHeader from './MenuHeader/MenuHeader';
 import UserList from './UserList/UserList';
 import ChatHeader from './ChatHeader/ChatHeader';
 import Conversation from './Conversation/Conversation';
+import ConversationHistory from './ConversationHistory/ConversationHistory';
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   UserList,
   ChatHeader,
   Conversation,
+  ConversationHistory,
 };
