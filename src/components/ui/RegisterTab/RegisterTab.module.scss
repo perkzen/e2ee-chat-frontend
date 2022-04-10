@@ -1,9 +1,12 @@
+@import "theme";
+
 .Container {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 
   .ErrorMessage {
-    color: red;
+    align-self: center;
+    color: $error-color;
   }
 }

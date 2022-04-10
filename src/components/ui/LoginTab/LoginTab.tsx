@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import classes from './LoginTab.module.scss';
 import { Button, Input } from '../index';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch } from '../../../store/app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../store/app/hooks';
 import { login } from '../../../store/actions/authActions';
+import { Typography } from '@mui/material';
+import { removeError } from '../../../store/features/authSlice';
 
 interface LoginFormData {
   username: string;
@@ -21,6 +23,7 @@ const LoginTab: FC = () => {
     reValidateMode: 'onSubmit',
     defaultValues,
   });
+  const err = useAppSelector((state) => state.auth.error);
 
   const { errors } = formState;
 
@@ -28,10 +31,26 @@ const LoginTab: FC = () => {
     dispatch(login(data));
   };
 
+  useEffect(() => {
+    return () => {
+      dispatch(removeError());
+    };
+  }, []);
+
   return (
     <form className={classes.Container} onSubmit={handleSubmit(onSubmit)}>
-      <Input label={'Username'} {...register('username')} />
-      <Input label={'Password'} {...register('password')} type={'password'} />
+      <Typography className={classes.ErrorMessage}>{err}</Typography>
+      <Input
+        label={'Username'}
+        {...register('username', { required: 'This field is required!' })}
+        errors={errors.username}
+      />
+      <Input
+        label={'Password'}
+        {...register('password', { required: 'This field is required!' })}
+        type={'password'}
+        errors={errors.password}
+      />
       <Button text={'Login'} />
     </form>
   );

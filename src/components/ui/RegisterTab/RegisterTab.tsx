@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import classes from './RegisterTab.module.scss';
 import { Button, Input } from '../index';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../store/app/hooks';
 import { registerUser } from '../../../store/actions/authActions';
-import { FormHelperText } from '@mui/material';
+import { Typography } from '@mui/material';
+import { removeError } from '../../../store/features/authSlice';
 
 interface RegisterFormData {
   username: string;
@@ -32,16 +33,32 @@ const RegisterTab: FC = () => {
     dispatch(registerUser(data));
   };
 
+  useEffect(() => {
+    return () => {
+      dispatch(removeError());
+    };
+  }, []);
+
   return (
     <form className={classes.Container} onSubmit={handleSubmit(onSubmit)}>
-      <Input label={'Username'} {...register('username')} />
-      <Input label={'Password'} {...register('password1')} type={'password'} />
+      <Typography className={classes.ErrorMessage}>{err}</Typography>
+      <Input
+        label={'Username'}
+        {...register('username', { required: 'This field is required!' })}
+        errors={errors.username}
+      />
+      <Input
+        label={'Password'}
+        {...register('password1', { required: 'This field is required!' })}
+        type={'password'}
+        errors={errors.password1}
+      />
       <Input
         label={'Confirm password'}
-        {...register('password2')}
+        {...register('password2', { required: 'This field is required!' })}
         type={'password'}
+        errors={errors.password2}
       />
-      <FormHelperText className={classes.ErrorMessage}>{err}</FormHelperText>
       <Button text={'Register'} />
     </form>
   );

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userStorage } from '../../utils/localStorage';
 import { User } from '../models/Auth';
-import {generateKey} from "../../utils/crypto";
+import { generateKey } from '../../utils/crypto';
 
 interface AuthState {
   user: User | null;
@@ -24,7 +24,7 @@ export const authSlice = createSlice({
       state.error = null;
     },
     loginSuccess: (state, action: PayloadAction<User>) => {
-      const authUser: User = {...action.payload, key: generateKey()};//fun call
+      const authUser: User = { ...action.payload, key: generateKey() }; //fun call
       userStorage.setUser(authUser);
       state.user = authUser;
       state.loading = false;
@@ -45,8 +45,12 @@ export const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    removeError: (state) => {
+      state.error = null;
+    },
   },
 });
 
-export const { loginStart, registerStart, logout } = authSlice.actions;
+export const { loginStart, registerStart, logout, removeError } =
+  authSlice.actions;
 export default authSlice.reducer;
