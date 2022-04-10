@@ -13,7 +13,7 @@ import { fetchConversationHistory } from '../../../store/actions/chatActions';
 const Menu: FC = () => {
   const [value, setValue] = useState('1');
   const [users, setUsers] = useState<User[]>([]);
-  const history = useAppSelector((state) => state.chat.history);
+  const { history, messages } = useAppSelector((state) => state.chat);
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
@@ -31,7 +31,7 @@ const Menu: FC = () => {
     if (user) {
       dispatch(fetchConversationHistory(user.id));
     }
-  }, [user]);
+  }, [user, messages]);
 
   return (
     <>
