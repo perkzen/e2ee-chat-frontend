@@ -14,6 +14,8 @@ import { put } from 'redux-saga/effects';
 import instance from '../../axios';
 import { Chat } from '../../api';
 import { Message } from '../models/Chat';
+import { toast } from 'react-hot-toast';
+import { Errors } from '../../../errors';
 
 export function* startConversationSaga(
   action: ReturnType<typeof conversationStart>
@@ -22,13 +24,13 @@ export function* startConversationSaga(
     const { data } = (yield instance.post(
       Chat.CONVERSATION,
       action.payload
-    )) as AxiosResponse<{id:string, keyPair:string[]}>;
+    )) as AxiosResponse<{ id: string; keyPair: string[] }>;
     yield put(conversationSuccess(data));
   } catch (e) {
     const error = e as AxiosError;
     const errorMessage = error.response?.data.message;
     yield put(conversationError(errorMessage));
-    console.log(errorMessage);
+    toast.error(Errors.SOMETHING_WENT_WRONG);
   }
 }
 
@@ -45,7 +47,7 @@ export function* sendMessageSaga(
     const error = e as AxiosError;
     const errorMessage = error.response?.data.message;
     yield put(sendMessageError(errorMessage));
-    console.log(errorMessage);
+    toast.error(Errors.MESSAGE_FAILED);
   }
 }
 
@@ -61,6 +63,6 @@ export function* fetchMessagesSaga(
     const error = e as AxiosError;
     const errorMessage = error.response?.data.message;
     yield put(fetchMessagesError(errorMessage));
-    console.log(errorMessage);
+    toast.error(Errors.MESSAGE_FETCH);
   }
 }

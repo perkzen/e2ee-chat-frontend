@@ -12,6 +12,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { User } from '../models/Auth';
 import { loginStart, registerStart } from '../features/authSlice';
 import { joinChat } from '../features/socketSlice';
+import { toast } from 'react-hot-toast';
 
 export function* LoginSaga(action: ReturnType<typeof login>): Generator {
   try {
@@ -22,11 +23,11 @@ export function* LoginSaga(action: ReturnType<typeof login>): Generator {
     )) as AxiosResponse<User>;
     yield put(loginSuccess(data));
     yield put(joinChat(data));
+    toast.success('Login successful');
   } catch (e) {
     const error = e as AxiosError;
     const errorMessage = error.response?.data.message;
     yield put(loginError(errorMessage));
-    console.log(errorMessage);
   }
 }
 
@@ -36,10 +37,10 @@ export function* RegisterSaga(
   try {
     yield put(registerStart());
     yield instance.post(Auth.REGISTER, action.payload);
+    toast.success('Account was created successfully');
   } catch (e) {
     const error = e as AxiosError;
     const errorMessage = error.response?.data.message;
     yield put(registerError(errorMessage));
-    console.log(errorMessage);
   }
 }
