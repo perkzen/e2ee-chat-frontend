@@ -47,14 +47,14 @@ const chatSlice = createSlice({
       state.error = action.payload;
     },
     receiveMessage: (state, action: PayloadAction<Message>) => {
-      console.log(state.receiver?.id === action.payload.senderId);
-      if (state.receiver?.id !== action.payload.senderId) {
-        toast(`You received a new message!`, {
-          icon: '✉️',
-        });
-      } else {
-        state.messages = [...state.messages, action.payload];
-      }
+      // if (state.receiver?.id !== action.payload.senderId) {
+      //   toast(`You received a new message!`, {
+      //     icon: '✉️',
+      //   });
+      // } else {
+      //   state.messages = [...state.messages, action.payload];
+      // }
+      state.messages = [...state.messages, action.payload];
     },
     fetchMessagesLoading: (state) => {
       state.loading = true;
