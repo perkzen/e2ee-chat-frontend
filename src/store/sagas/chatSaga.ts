@@ -15,7 +15,7 @@ import instance from '../../axios';
 import { Chat } from '../../api';
 import { Message } from '../models/Chat';
 import { toast } from 'react-hot-toast';
-import { Errors } from '../../../errors';
+import { Errors } from '../../errors';
 
 export function* startConversationSaga(
   action: ReturnType<typeof conversationStart>
