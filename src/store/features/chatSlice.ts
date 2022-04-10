@@ -2,6 +2,7 @@ import { User } from '../models/Auth';
 import { Message } from '../models/Chat';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { logout } from './authSlice';
+import { toast } from 'react-hot-toast';
 
 export interface ChatState {
   receiver: User | null;
@@ -46,8 +47,15 @@ const chatSlice = createSlice({
     sendMessageError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    receiveMessage: (state, action) => {
-      state.messages = [...state.messages, action.payload];
+    receiveMessage: (state, action: PayloadAction<Message>) => {
+      console.log(state.receiver?.id === action.payload.senderId);
+      if (state.receiver?.id !== action.payload.senderId) {
+        toast(`You received a new message!`, {
+          icon: '✉️',
+        });
+      } else {
+        state.messages = [...state.messages, action.payload];
+      }
     },
     fetchMessagesLoading: (state) => {
       state.loading = true;
