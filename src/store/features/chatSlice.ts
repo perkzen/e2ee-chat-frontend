@@ -1,10 +1,11 @@
 import { User } from '../models/Auth';
 import { Message } from '../models/Chat';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { logout } from './authSlice';
 
 export interface ChatState {
   receiver: User | null;
-  conversation: {id:string, keyPair:string[]} | null;
+  conversation: { id: string; keyPair: string[] } | null;
   messages: Message[];
   loading: boolean;
   error: string | null;
@@ -28,7 +29,10 @@ const chatSlice = createSlice({
     conversationLoading: (state) => {
       state.loading = true;
     },
-    conversationSuccess: (state, action: PayloadAction<{id:string, keyPair:string[]}>) => {
+    conversationSuccess: (
+      state,
+      action: PayloadAction<{ id: string; keyPair: string[] }>
+    ) => {
       state.conversation = action.payload;
       state.loading = false;
     },
@@ -56,6 +60,13 @@ const chatSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(logout, (state) => {
+      state.receiver = null;
+      state.messages = [];
+      state.conversation = null;
+    });
   },
 });
 
