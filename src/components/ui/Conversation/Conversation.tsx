@@ -106,7 +106,7 @@ const Conversation = () => {
               className={classes.Input}
               {...register('text', { required: 'This field is required' })}
             />
-            <IconButton>
+            <IconButton type={'submit'}>
               <SendIcon sx={{ color: '#2979FF' }} />
             </IconButton>
           </form>
