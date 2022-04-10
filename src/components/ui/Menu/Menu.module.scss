@@ -5,21 +5,13 @@
     flex-direction: column;
     gap: 2rem;
   }
-
   .UserList {
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
-
-  .ButtonContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
     button {
       width: 80%;
       align-self: center;
     }
-  }
 }

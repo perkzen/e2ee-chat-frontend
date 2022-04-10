@@ -36,8 +36,8 @@ const RegisterTab: FC = () => {
 
   return (
     <form className={classes.Container} onSubmit={handleSubmit(onSubmit)}>
-      <Input label={'Username'} {...register('username')} />
-      <Input label={'Password'} {...register('password1')} type={'password'} />
+      <Input label={'Username'} bgWhite {...register('username')} />
+      <Input label={'Password'} bgWhite {...register('password1')} type={'password'} />
       <Input
         label={'Confirm password'}
         {...register('password2')}

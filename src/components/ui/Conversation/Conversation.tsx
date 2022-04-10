@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Box } from '@mui/material';
+import {Box, IconButton} from '@mui/material';
 import classes from './Conversation.module.scss';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import { v4 } from 'uuid';
@@ -13,6 +13,7 @@ import {
   sendMessage,
 } from '../../../store/actions/chatActions';
 import { receiveMessage } from '../../../store/features/chatSlice';
+import SendIcon from '@mui/icons-material/Send';
 
 interface InputData {
   text: string;
@@ -105,6 +106,9 @@ const Conversation = () => {
               className={classes.Input}
               {...register('text', { required: 'This field is required' })}
             />
+            <IconButton>
+              <SendIcon />
+            </IconButton>
           </form>
         </>
       )}

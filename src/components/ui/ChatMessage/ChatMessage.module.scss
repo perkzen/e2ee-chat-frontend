@@ -13,11 +13,21 @@
     word-wrap: break-word;
   }
 
+  .messageDate {
+    position: relative;
+    bottom: -10px;
+    width: fit-content;
+    margin-top: -20px;
+    color: #828282;
+    font-size: 1em;
+  }
+
   .messageBox {
     border-radius: 20px;
     padding: 5px 20px;
     display: inline-block;
     max-width: 50%;
+    height: calc(100% - 50px);
   }
 
 
@@ -69,5 +79,5 @@
   display: flex;
   justify-content: flex-start;
   color: #353535;
-  background-color: #dadada;
+  background-color: rgb(53, 54, 58);
 }
