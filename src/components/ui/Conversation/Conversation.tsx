@@ -14,6 +14,7 @@ import {
 } from '../../../store/actions/chatActions';
 import {receiveMessage} from '../../../store/features/chatSlice';
 import SendIcon from '@mui/icons-material/Send';
+import { encryptMessage } from "../../../utils/crypto";
 
 interface InputData {
     text: string;
@@ -49,15 +50,16 @@ const Conversation = () => {
 
     const onSubmit = (data: InputData) => {
         if (conversation?.id && user && receiver) {
+            const encryptedMessage = encryptMessage(data.text, conversation.computedSecret);
             const message: Message = {
                 senderId: user.id,
                 conversationId: conversation.id,
-                text: data.text,
+                text: encryptedMessage,
             };
             socket.emit('send_message', {
                 senderId: user.id,
                 receiver: receiver,
-                text: data.text,
+                text: encryptedMessage,
             });
             dispatch(sendMessage(message));
         }
@@ -67,10 +69,8 @@ const Conversation = () => {
     useEffect(() => {
         // not optimized should execute when user sends first message
         if (receiver && user) {
-            console.log(user?.key);
-            console.log(receiver?.key);
             dispatch(
-                conversationStart({senderId: user.id, receiverId: receiver.id, keyPair: [user.key, receiver.key]})
+                conversationStart({senderId: user.id, receiverId: receiver.id})
             );
         }
     }, [receiver, dispatch, user]);
@@ -80,7 +80,7 @@ const Conversation = () => {
     }, [receiver, conversation, dispatch]);
 
     useEffect(() => {
-        socket.on('receive_message', (data: Message) => {
+        socket.on('receive_message', async(data: Message) => {
             if (data.senderId === receiver?.id) {
                 dispatch(receiveMessage(data));
             }

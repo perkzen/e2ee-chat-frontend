@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userStorage } from '../../utils/localStorage';
 import { User } from '../models/Auth';
-import {generateKey} from "../../utils/crypto";
 
 interface AuthState {
   user: User | null;
@@ -24,7 +23,7 @@ export const authSlice = createSlice({
       state.error = null;
     },
     loginSuccess: (state, action: PayloadAction<User>) => {
-      const authUser: User = {...action.payload, key: generateKey()};//fun call
+      const authUser: User = action.payload;
       userStorage.setUser(authUser);
       state.user = authUser;
       state.loading = false;

@@ -8,5 +8,9 @@ export interface Message {
 export interface ConversationRequest {
     senderId: string;
     receiverId: string;
-    keyPair: (string | undefined)[];
+}
+
+export interface Conversation {
+    id: string;
+    computedSecret: string;
 }

@@ -6,7 +6,6 @@ import './Dot.scss';
 import { User } from '../../../store/models/Auth';
 import { useAppDispatch } from '../../../store/app/hooks';
 import { selectReceiver } from '../../../store/features/chatSlice';
-
 interface OnlineUserProps {
   user: User;
   dot?: boolean;

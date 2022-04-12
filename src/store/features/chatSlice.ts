@@ -1,10 +1,10 @@
 import { User } from '../models/Auth';
-import { Message } from '../models/Chat';
+import {Conversation, Message} from '../models/Chat';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ChatState {
   receiver: User | null;
-  conversation: {id:string, keyPair:string[]} | null;
+  conversation: Conversation | null;
   messages: Message[];
   loading: boolean;
   error: string | null;
@@ -28,7 +28,7 @@ const chatSlice = createSlice({
     conversationLoading: (state) => {
       state.loading = true;
     },
-    conversationSuccess: (state, action: PayloadAction<{id:string, keyPair:string[]}>) => {
+    conversationSuccess: (state, action: PayloadAction<Conversation>) => {
       state.conversation = action.payload;
       state.loading = false;
     },

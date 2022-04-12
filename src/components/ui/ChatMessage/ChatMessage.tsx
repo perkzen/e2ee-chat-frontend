@@ -1,9 +1,9 @@
 import React, { FC, LegacyRef } from 'react';
-import dateFormat, { masks } from 'dateformat';
 import classes from './ChatMessage.module.scss';
 import { Message } from '../../../store/models/Chat';
 import { classNames } from '../../../utils/classNames';
 import { useAppSelector } from '../../../store/app/hooks';
+import {decryptMessage} from "../../../utils/crypto";
 
 interface ChatMessageProps {
   message: Message;
@@ -12,10 +12,11 @@ interface ChatMessageProps {
 
 const ChatMessage: FC<ChatMessageProps> = ({ message, messageRef }) => {
   const { user } = useAppSelector((state) => state.auth);
+  const { conversation } = useAppSelector(
+      (state) => state.chat
+  );
 
-  // masks.hammerTime = 'dd-mm-yyyy hh:MM';
-  // const dateformat = (date: Date | undefined): string =>
-  //   dateFormat(date, 'hammerTime');
+  const { text } = message;
 
   return (
     <div
@@ -33,9 +34,8 @@ const ChatMessage: FC<ChatMessageProps> = ({ message, messageRef }) => {
           user?.id === message.senderId ? classes.SentByMe : classes.NotSentByMe
         )}
       >
-        <p className={classes.MessageText}>{message.text}</p>
+        <p className={classes.MessageText}>{decryptMessage(text, conversation!.computedSecret)}</p>
       </div>
-      {/*<small>{dateformat(message.time)}</small>*/}
     </div>
   );
 };

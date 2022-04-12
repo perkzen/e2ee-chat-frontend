@@ -1,12 +1,12 @@
 import { createAction } from '@reduxjs/toolkit';
-import { ConversationRequest, Message } from '../models/Chat';
+import {Conversation, ConversationRequest, Message} from '../models/Chat';
 
 export const CHAT_SLICE = 'chat';
 
 export const conversationStart = createAction<ConversationRequest>(
   `${CHAT_SLICE}/conversationLoading`
 );
-export const conversationSuccess = createAction<{id:string, keyPair:string[]}>(
+export const conversationSuccess = createAction<Conversation>(
   `${CHAT_SLICE}/conversationSuccess`
 );
 export const conversationError = createAction<string>(
