@@ -43,7 +43,7 @@ const RegisterTab: FC = () => {
 
   return (
     <form className={classes.Container} onSubmit={handleSubmit(onSubmit)}>
-      <Typography className={classes.ErrorMessage}>{err}</Typography>
+      <Typography className={classes.ErrorMessage}>{err ? err : ''}</Typography>
       <Input
         label={'Username'}
         {...register('username', { required: 'This field is required!' })}
