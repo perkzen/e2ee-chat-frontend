@@ -22,8 +22,8 @@ export function* LoginSaga(action: ReturnType<typeof login>): Generator {
       action.payload
     )) as AxiosResponse<User>;
     yield put(loginSuccess(data));
-    yield put(joinChat(data));
     toast.success('Login successful');
+    yield put(joinChat());
   } catch (e) {
     const error = e as AxiosError;
     const errorMessage = error.response?.data.message;

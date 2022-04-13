@@ -9,14 +9,11 @@ export interface Message {
 }
 
 export interface ConversationRequest {
-  senderId: string;
-  receiverId: string;
-  keyPair: (string | undefined)[];
+    senderId: string;
+    receiverId: string;
 }
 
 export interface Conversation {
-  id: string;
-  keyPair: string[];
-  lastMessage?: Message;
-  user: User;
+    id: string;
+    computedSecret: string;
 }

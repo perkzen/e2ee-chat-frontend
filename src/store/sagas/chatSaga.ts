@@ -2,9 +2,6 @@ import {
   conversationError,
   conversationStart,
   conversationSuccess,
-  fetchConversationHistory,
-  fetchConversationHistoryError,
-  fetchConversationHistorySuccess,
   fetchMessages,
   fetchMessagesError,
   fetchMessagesSuccess,
@@ -67,21 +64,5 @@ export function* fetchMessagesSaga(
     const errorMessage = error.response?.data.message;
     yield put(fetchMessagesError(errorMessage));
     toast.error(Errors.MESSAGE_FETCH);
-  }
-}
-
-export function* fetchConversationHistorySaga(
-  action: ReturnType<typeof fetchConversationHistory>
-): Generator {
-  try {
-    const { data } = (yield instance.get(
-      `${Chat.HISTORY}/${action.payload}`
-    )) as AxiosResponse<Conversation[]>;
-    yield put(fetchConversationHistorySuccess(data));
-  } catch (e) {
-    const error = e as AxiosError;
-    const errorMessage = error.response?.data.message;
-    yield put(fetchConversationHistoryError(errorMessage));
-    toast.error(Errors.HISTORY);
   }
 }

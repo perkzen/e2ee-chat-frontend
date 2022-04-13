@@ -1,5 +1,5 @@
 import { User } from '../models/Auth';
-import { Conversation, Message } from '../models/Chat';
+import {Conversation, Message} from '../models/Chat';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { logout } from './authSlice';
 import { toast } from 'react-hot-toast';
@@ -7,7 +7,6 @@ import { toast } from 'react-hot-toast';
 export interface ChatState {
   receiver: User | null;
   conversation: Conversation | null;
-  history: Conversation[] | null;
   messages: Message[];
   loading: boolean;
   error: string | null;
@@ -16,7 +15,6 @@ export interface ChatState {
 const initialState: ChatState = {
   receiver: null,
   conversation: null,
-  history: null,
   messages: [],
   loading: false,
   error: null,
@@ -46,14 +44,7 @@ const chatSlice = createSlice({
     sendMessageError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    receiveMessage: (state, action: PayloadAction<Message>) => {
-      // if (state.receiver?.id !== action.payload.senderId) {
-      //   toast(`You received a new message!`, {
-      //     icon: '✉️',
-      //   });
-      // } else {
-      //   state.messages = [...state.messages, action.payload];
-      // }
+    receiveMessage: (state, action) => {
       state.messages = [...state.messages, action.payload];
     },
     fetchMessagesLoading: (state) => {
@@ -67,27 +58,6 @@ const chatSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
-    fetchConversationHistoryStart: (state) => {
-      state.loading = true;
-    },
-    fetchConversationHistorySuccess: (
-      state,
-      action: PayloadAction<Conversation[]>
-    ) => {
-      state.history = action.payload;
-      state.loading = false;
-    },
-    fetchConversationHistoryError: (state, action: PayloadAction<string>) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(logout, (state) => {
-      state.receiver = null;
-      state.messages = [];
-      state.conversation = null;
-    });
   },
 });
 

@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Conversation, ConversationRequest, Message } from '../models/Chat';
+import {Conversation, ConversationRequest, Message} from '../models/Chat';
 
 export const CHAT_SLICE = 'chat';
 
@@ -31,14 +31,4 @@ export const fetchMessagesSuccess = createAction<Message[]>(
 );
 export const fetchMessagesError = createAction<string>(
   `${CHAT_SLICE}/fetchMessagesError`
-);
-
-export const fetchConversationHistory = createAction<string>(
-  `${CHAT_SLICE}/fetchConversationHistoryStart`
-);
-export const fetchConversationHistorySuccess = createAction<Conversation[]>(
-  `${CHAT_SLICE}/fetchConversationHistorySuccess`
-);
-export const fetchConversationHistoryError = createAction<string>(
-  `${CHAT_SLICE}/fetchConversationHistoryError`
 );
