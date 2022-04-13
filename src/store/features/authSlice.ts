@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userStorage } from '../../utils/localStorage';
 import { User } from '../models/Auth';
-import {generateKey} from "../../utils/crypto";
 
 interface AuthState {
   user: User | null;
